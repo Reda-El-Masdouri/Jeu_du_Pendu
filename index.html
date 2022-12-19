@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>Jeu du Pendu</title>
+  <link href="style.css" rel="stylesheet" type="text/css" />
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+</head>
+
+<body>
+  <div class="container">
+    <h1>Jeu du Pendu</h1>
+    <p>Description du Jeu</p>
+    <div class="jeu-container">
+      <!-- Dessin -->
+      <svg height="250" width="200" class=figure-contenant>
+        <!--support-->
+        <line x1="60" y1="20" x2="140" y2="20"/>
+        <line x1="140" y1="20" x2="140" y2="50"/>
+        <line x1="60" y1="20" x2="60" y2="230"/>
+        <line x1="20" y1="230" x2="100" y2="230"/>
+        <!--bonhomme-->
+          <!--tête-->
+        <circle cx="140" cy="70" r="20" class="bonhomme-part"/>
+          <!--corp-->
+        <line x1="140" y1="90" x2="140" y2="150" class="bonhomme-part"/>
+          <!--bras-->
+        <line x1="140" y1="120" x2="120" y2="100" class="bonhomme-part"/>
+        <line x1="140" y1="120" x2="160" y2="100" class="bonhomme-part"/>
+          <!--jambre-->
+        <line x1="140" y1="150" x2="120" y2="180" class="bonhomme-part"/>
+        <line x1="140" y1="150" x2="160" y2="180" class="bonhomme-part"/>
+      </svg>
+      <!-- la balise des mauvaises lettres que l'utilisateur à déjà tapé-->
+      <div class="mauvaises-lettres-container">
+        <p></p>
+        <div id="mauvaises-lettres"></div>
+      </div>
+      <!-- la balise du mot en question -->
+      <div class="mot" id="mot"></div>
+    </div>
+    <!-- message final qui informe l'utilisateur si il a gagné ou perdu la parti -->
+    <div class="message-final-container" id="message-final-container">
+      <div class="message-final">
+        <h2 id="message">
+          Bravo ! vous avez gagné.
+        </h2>
+        <button id="btn-rejouer">Rejouer</button>
+      </div>
+    </div>
+    <!-- notification qui informe l'utilisateur s'il a déjà tapé une lettre -->
+    <div class="notification-container" id="notification-container">
+      <p>Vous avez déja essayé cette lettre !</p>
+    </div>
+  </div>
+  
+  <script src="script.js"></script>
+
+ 
+</body>
+
+</html>
