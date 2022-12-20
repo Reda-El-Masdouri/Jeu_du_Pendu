@@ -4,9 +4,9 @@ html {
 }
 
 body{
-  /*height: 100%;*/
+  min-width: 860px;
   width: 100%;
-  height: 80vh;
+  height: 100%;
   background-color: #6d7e92;
   color: #ffffff;
 }
@@ -16,6 +16,7 @@ body{
   stroke-width: 4px;
   stroke-linecap: round;
   fill: transparent;
+  margin-left: 20px;
 }
 
 .bonhomme-part {
@@ -57,9 +58,10 @@ body{
 .mot {
   display: flex;
   position: absolute;
-  bottom: 10px;
+  bottom: 40px;
   left: 50%;
   transform: translateX(-50%);
+  padding-bottom: 20px;
 }
 
 .lettre {
@@ -109,12 +111,49 @@ body{
 
 .notification-container {
   background-color: rgba(0, 0, 0, 0.3);
-  border-radius: 10px 10px 0 0;
+  border-radius: 10px 10px 10px 10px;
   padding: 10px 20px;
   position: relative;
-  bottom: -50px;
+  bottom: -75px;
   transition: transform 0.3 ease-in-out;
 }
 .notification-container.afficher {
-  transform: translateY(-50px);
+  transform: translateY(-75px);
+}
+
+.description {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  padding-top: 20px;
+  margin-top: 20px;
+  bottom: -10;
+}
+
+.themes {
+  display: flex;
+  position: absolute;
+  left: -35%;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.all-themes td {
+  padding: 10px 20px;
+  margin: 5px 5px;
+  border: 2px solid gray;
+  background-color: lightgray;
+  width: 100%;
+  text-align: center;
+  cursor: pointer;
+}
+.all-themes td:hover {
+  border: 2px solid #ffb6c1;
+  color: #ffb6c1;
+}
+.all-themes td:focus {
+  outline: 0;
 }

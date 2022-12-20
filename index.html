@@ -7,6 +7,7 @@
   <title>Jeu du Pendu</title>
   <link href="style.css" rel="stylesheet" type="text/css" />
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="themes.js"></script>
 </head>
 
 <body>
@@ -14,6 +15,16 @@
     <h1>Jeu du Pendu</h1>
     <p>Description du Jeu</p>
     <div class="jeu-container">
+      <!-- Themes -->
+      <div class="themes" id="themes">
+        <table class="all-themes">
+          <!--<tr><td>theme 1</td></tr>
+          <tr><td>theme 2</td></tr>
+          <tr><td>theme 3</td></tr>
+          <tr><td>theme 4</td></tr>
+          <tr><td>theme 5</td></tr>-->
+        </table>
+      </div>
       <!-- Dessin -->
       <svg height="250" width="200" class=figure-contenant>
         <!--support-->
@@ -39,7 +50,10 @@
         <div id="mauvaises-lettres"></div>
       </div>
       <!-- la balise du mot en question -->
+      
       <div class="mot" id="mot"></div>
+      <div class="description" id="description"></div>
+      
     </div>
     <!-- message final qui informe l'utilisateur si il a gagné ou perdu la parti -->
     <div class="message-final-container" id="message-final-container">
