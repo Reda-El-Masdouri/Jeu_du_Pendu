@@ -1,3 +1,24 @@
+// les joueurs
+function joueur() {
+    this.pseudoName = "";
+    this.bonnesLettresJoueur = 0;
+    this.mauvaisesLettresJoueur = 0;
+    this.tempsJoueur = 0;
+}
+// tableau top dix
+const topDix = []
+for (let index = 0; index < 10; index++) {
+    topDix[index] = new joueur();
+}
+
+// début du jeu
+var bonnesLettresTempJoueur;
+var mauvaisesLettresTempJoueur;
+var debut;
+var fin;
+var temps;
+
+// les balises html
 const mot = $('#mot');
 const mauvaisesLettres = $('#mauvaises-lettres');
 const btnRejouer = $('#btn-rejouer');
@@ -6,6 +27,7 @@ const notification = $('#notification-container');
 const message = $('#message');
 const themesTable = $('.all-themes');
 const bonhommeParts = $('.bonhomme-part');
+const btnTopDix = $('.btn-meilleurs-joueurs-container button');
 
 const themesJSON = [ecoleJSON, paysagesClimatJSON, calculMesuresJSON, alimentsJSON, gestesMouvementsJSON];
 const themes = themesJSON.map(JSON.parse);
@@ -14,16 +36,6 @@ const themes = themesJSON.map(JSON.parse);
 themesTable.html(`
     ${themes.map(oneTheme => `<tr><td class="oneTheme">${oneTheme.intitule}</td></tr>`)}
     `);
-
-//const ecoleTheme = JSON.parse(ecoleJSON);
-//console.log(themes);
-//console.log(ecoleJSON);
-//console.log(ecoleTheme.theme);
-//const mots = ['ordinateur', 'programmation', 'javascript', 'html', 'universite'];
-//let motSelectionne = mots[Math.floor(Math.random() * mots.length)];
-//let selection = ecoleTheme.theme[Math.floor(Math.random() * ecoleTheme.theme.length)];
-//let motSelectionne = selection.mot;
-//let description = selection.description;
 
 const tabBonneLettres = [];
 const tabMauvaisesLettres = [];
@@ -36,25 +48,22 @@ var description;
 function addClickOnTd() {
     jQuery.each($('.oneTheme'), (index, maClasse) => {
         $(maClasse).on('click', function() {
-            
             tabBonneLettres.splice(0);
             tabMauvaisesLettres.splice(0);
-            
             themeSelectione = themes[index];
-            selection = themeSelectione.theme[Math.floor(Math.random() * themeSelectione.theme.length)];
-            motSelectionne = selection.mot;
-            description = selection.description;
+            maSelection()
             console.log(motSelectionne);
-            
             updateMauvaisesLettres();
-            
             afficherMot();
-            
         })
     });
 }
 
-
+function maSelection() {
+    selection = themeSelectione.theme[Math.floor(Math.random() * themeSelectione.theme.length)];
+    motSelectionne = selection.mot;
+    description = selection.description;
+}
 
 // fonction pour afficher le motSelectionne:
 function afficherMot() {
@@ -69,6 +78,9 @@ function afficherMot() {
     $('#description').text(description)
     if(mot.text() === motSelectionne){
         message.text("Bravo ! Vous avez gagné !");
+        if(!($('.message-final p').is(':empty')))
+            $('.message-final p').remove();
+        btnRejouer.text("Continuer");
         messageFinal.css({"display":"flex"});
         $(window).off('keydown');
     }
@@ -96,7 +108,13 @@ function updateMauvaisesLettres() {
     })
     // tester game over
     if(tabMauvaisesLettres.length === bonhommeParts.length){
-        message.text("Vous avez perdu !");
+        fin = Date.now();
+        temps = fin - debut;
+        if(!($('.message-final p').is(':empty')))
+            $('.message-final p').remove();
+        message.text("Vous avez perdu cette partie !");
+        message.append($('<p>').html(`Bonnes lettres: ${bonnesLettresTempJoueur}     Mauvaises Lettres: ${mauvaisesLettresTempJoueur}`));
+        btnRejouer.text("Comparer mes résultats");
         messageFinal.css({"display":"flex"});
         $(window).off('keydown');
     }
@@ -120,6 +138,7 @@ function activateKeys() {
                 if(motSelectionne.includes(lettre)){
                     if(!tabBonneLettres.includes(lettre)){
                         tabBonneLettres.push(lettre);
+                        bonnesLettresTempJoueur++;
                         afficherMot();
                     } else {
                         afficherNotification();
@@ -127,6 +146,7 @@ function activateKeys() {
                 } else {
                     if(!tabMauvaisesLettres.includes(lettre)){
                         tabMauvaisesLettres.push(lettre);
+                        mauvaisesLettresTempJoueur++;
                         updateMauvaisesLettres();
                     } else {
                         afficherNotification();
@@ -138,20 +158,116 @@ function activateKeys() {
 }
 
 btnRejouer.click(e => {
-    tabBonneLettres.splice(0);
-    tabMauvaisesLettres.splice(0);
+    if(btnRejouer.text()==="Continuer"){
+        tabBonneLettres.splice(0);
+        tabMauvaisesLettres.splice(0);
 
-    selection = themeSelectione.theme[Math.floor(Math.random() * themeSelectione.theme.length)];
-    motSelectionne = selection.mot;
-    description = selection.description;
+        maSelection()
 
-    $(window).on('keydown', activateKeys());
-    updateMauvaisesLettres();
-    afficherMot();
-    messageFinal.css({"display":"none"});
+        $(window).on('keydown', activateKeys());
+        updateMauvaisesLettres();
+        afficherMot();
+        messageFinal.css({"display":"none"});
+    }
+    if(btnRejouer.text()==="Rejouer"){
+        tabBonneLettres.splice(0);
+        tabMauvaisesLettres.splice(0);
+        initiate();
+        maSelection()
+
+        $(window).on('keydown', activateKeys());
+        updateMauvaisesLettres();
+        afficherMot();
+        messageFinal.css({"display":"none"});
+    }
+    if(btnRejouer.text() === "Comparer mes résultats"){
+        if(isTopDix()){
+            message.text("Vous êtes top 10 !");
+            //messageFinal.remove(btnRejouer);
+            //$('.message-final').append($('<p>').html(`Saisissez votre nom: <input id="pseudo" type="text"/>`));
+            $('<p>').html(`Saisissez votre nom: <input id="pseudo" type="text"/>`).insertBefore(btnRejouer);
+            btnRejouer.text("Valider");
+            return;
+        }
+        else {
+            message.text("Malheuresement, vous n'êtes pas top 10 !");
+            btnRejouer.text("Rejouer");
+        }
+    }
+    if(btnRejouer.text() === "Valider"){
+        topDix[9].pseudoName = $('#pseudo').val();
+        topDix[9].bonnesLettresJoueur = bonnesLettresTempJoueur;
+        topDix[9].mauvaisesLettresJoueur = mauvaisesLettresTempJoueur;
+        topDix[9].tempsJoueur = temps;
+        sortTopDix();
+        localStorage['TOPDIX'] = JSON.stringify(topDix);
+        initiate();
+        tabBonneLettres.splice(0);
+        tabMauvaisesLettres.splice(0);
+
+        maSelection()
+
+        $(window).on('keydown', activateKeys());
+        updateMauvaisesLettres();
+        afficherMot();
+        messageFinal.css({"display":"none"});
+    }
 })
 
+btnTopDix.click(e => {
+    $('#table-topdix-container').css("display", "flex");
+})
+
+$('#OK-btn').click(e => {
+    $('#table-topdix-container').css("display", "none");
+})
+function sortTopDix() {
+    topDix.sort((a,b) => {
+        if(a.bonnesLettresJoueur < b.bonnesLettresJoueur)
+            return 1;
+        if(a.bonnesLettresJoueur > b.bonnesLettresJoueur)
+            return -1;
+        if(a.mauvaisesLettresJoueur < b.mauvaisesLettresJoueur)
+            return -1;
+        if(a.mauvaisesLettresJoueur > b.mauvaisesLettresJoueur)
+            return 1;
+        if(a.tempsJoueur < b.tempsJoueur)
+            return -1;
+        if(a.tempsJoueur > b.tempsJoueur)
+            return 1;
+    })
+}
+
+function initiate() {
+    bonnesLettresTempJoueur = 0;
+    mauvaisesLettresTempJoueur = 0;
+    debut = Date.now();
+}
+
+function isTopDix() {
+    return (
+        (bonnesLettresTempJoueur > topDix[9].bonnesLettresJoueur) ||
+        (bonnesLettresTempJoueur === topDix[9].bonnesLettresJoueur && mauvaisesLettresTempJoueur < topDix[9].mauvaisesLettresJoueur)||
+        (bonnesLettresTempJoueur === topDix[9].bonnesLettresJoueur && mauvaisesLettresTempJoueur === topDix[9].mauvaisesLettresJoueur && temps < topDix[9].tempsJoueur)
+    );
+}
+
+// table des top dix
+
+JSON.parse(localStorage['TOPDIX']).map((obj, index) => {
+    if(obj.pseudoName !== ""){
+        $('.table-topdix').append($('<tr>').append($('<td>').html(`${index+1}`))
+            .append($('<td>').html(`${obj.pseudoName}`))
+            .append($('<td>').html(`${obj.bonnesLettresJoueur}`))
+            .append($('<td>').html(`${obj.mauvaisesLettresJoueur}`))
+            .append($('<td>').html(`${obj.tempsJoueur}`))
+        )
+    }  
+})
+
+
 function startGame() {
+    initiate();
     addClickOnTd();
     activateKeys();
 }
