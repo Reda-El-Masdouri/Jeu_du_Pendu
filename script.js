@@ -7,9 +7,16 @@ function joueur() {
 }
 // tableau top dix
 const topDix = []
-for (let index = 0; index < 10; index++) {
-    topDix[index] = new joueur();
+if(localStorage['TOPDIX'] === undefined){
+    for (let index = 0; index < 10; index++) {
+        topDix[index] = new joueur();
+    }
+} else {
+    for (let index = 0; index < 10; index++) {
+        topDix[index] = JSON.parse(localStorage['TOPDIX'])[index];
+    }
 }
+
 
 // début du jeu
 var bonnesLettresTempJoueur;

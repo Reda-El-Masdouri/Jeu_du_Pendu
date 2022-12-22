@@ -77,10 +77,11 @@ body{
 .mot {
   display: flex;
   position: absolute;
-  bottom: 40px;
+  bottom: 10px;
   left: 50%;
   transform: translateX(-50%);
   padding-bottom: 20px;
+  
 }
 
 .lettre {
@@ -138,7 +139,7 @@ body{
   transition: transform 0.3 ease-in-out;
 }
 .notification-container.afficher {
-  transform: translateY(-75px);
+  transform: translateY(-250px);
 }
 
 .description {
@@ -150,7 +151,7 @@ body{
   transform: translateX(-50%);
   padding-top: 20px;
   margin-top: 20px;
-  bottom: -10px;
+  bottom: -35px;
 }
 
 .themes {
