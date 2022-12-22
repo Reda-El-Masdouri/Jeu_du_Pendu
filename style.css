@@ -1,6 +1,7 @@
 html {
   height: 100%;
   width: 100%;
+  
 }
 
 body{
@@ -8,7 +9,8 @@ body{
   min-height: 600px;
   width: 100%;
   height: 100%;
-  background-color: #6d7e92;
+  background: linear-gradient(45deg, #e2a9e5 15%, #2b94e5 100%) fixed;
+  
   color: #ffffff;
 }
 
@@ -18,6 +20,10 @@ body{
   stroke-linecap: round;
   fill: transparent;
   margin-left: 20px;
+}
+
+#description-jeu {
+  padding: 0 20px;
 }
 
 .bonhomme-part {
@@ -33,10 +39,22 @@ body{
   margin: 0;
   overflow: hidden;
 }
+.container h1 {
+  font-family: 'Dancing Script', cursive;
+  font-size: 36px;
+  margin: 20px 0;
+}
+#description-jeu {
+  font-family: 'Caveat', cursive;
+  font-size: 20px;
+  margin: 0;
+  max-height: 100px;
+}
 
 .jeu-container {
   padding: 20px 30px;
   margin: auto;
+  margin-top: 20px;
   height: 350px;
   width: 50%;
   position: relative;
@@ -68,12 +86,13 @@ body{
 .lettre {
   border-bottom: 3px solid #354961;
   display: inline-flex;
-  font-size: 30px;
+  font-size: 34px;
   align-items: center;
   justify-content: center;
   margin: 0 3px;
   height: 50px;
   width: 20px;
+  font-family: 'Caveat', cursive;
 }
 
 .message-final-container {
@@ -131,7 +150,7 @@ body{
   transform: translateX(-50%);
   padding-top: 20px;
   margin-top: 20px;
-  bottom: 0;
+  bottom: -10px;
 }
 
 .themes {
@@ -140,6 +159,11 @@ body{
   left: -35%;
   top: 50%;
   transform: translateY(-50%);
+}
+.oneTheme {
+ font-family: 'Great Vibes', cursive;
+ font-size: 18px;
+ color: black;
 }
 
 .all-themes td {
@@ -152,8 +176,8 @@ body{
   cursor: pointer;
 }
 .all-themes td:hover {
-  border: 2px solid #ffb6c1;
-  color: #ffb6c1;
+  border: 2px solid #2b94e5;
+  color: #2b94e5;
 }
 .all-themes td:focus {
   outline: 0;
@@ -202,12 +226,17 @@ body{
   font-size: 16px;
   border: 2px solid gray;
   background-color: lightgray;
-  color: white;
+  color: black;
   width: 225px;
+  font-family: 'Caveat', cursive;
+  font-size: 20px;
 }
 .btn-meilleurs-joueurs-container button:active {
   transform: scale(0.95);
 }
 .btn-meilleurs-joueurs-container button:focus {
   outline: 0;
+}
+#OK-btn {
+  margin-left: 10px;
 }

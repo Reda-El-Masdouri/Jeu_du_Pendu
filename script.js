@@ -77,7 +77,7 @@ function afficherMot() {
     //console.log(mot.text());
     $('#description').text(description)
     if(mot.text() === motSelectionne){
-        message.text("Bravo ! Vous avez gagné !");
+        message.text("Bravo ! Vous avez trouvé le mot !");
         if(!($('.message-final p').is(':empty')))
             $('.message-final p').remove();
         btnRejouer.text("Continuer");
@@ -216,6 +216,7 @@ btnRejouer.click(e => {
 
 btnTopDix.click(e => {
     $('#table-topdix-container').css("display", "flex");
+    remplirTableTopDix();
 })
 
 $('#OK-btn').click(e => {
@@ -253,17 +254,25 @@ function isTopDix() {
 }
 
 // table des top dix
+function remplirTableTopDix() {
+    if($('.table-topdix tbody') !== null){
+        $('.table-topdix tbody tr').remove();
+    }
+    if(localStorage['TOPDIX'] !== undefined){
+        JSON.parse(localStorage['TOPDIX']).map((obj, index) => {
+            if(obj.pseudoName !== ""){
+                $('.table-topdix tbody').append($('<tr>').append($('<td>').html(`${index+1}`))
+                    .append($('<td>').html(`${obj.pseudoName}`))
+                    .append($('<td>').html(`${obj.bonnesLettresJoueur}`))
+                    .append($('<td>').html(`${obj.mauvaisesLettresJoueur}`))
+                    .append($('<td>').html(`${obj.tempsJoueur}`))
+                )
+            }  
+        })
+    }
+    
+}
 
-JSON.parse(localStorage['TOPDIX']).map((obj, index) => {
-    if(obj.pseudoName !== ""){
-        $('.table-topdix').append($('<tr>').append($('<td>').html(`${index+1}`))
-            .append($('<td>').html(`${obj.pseudoName}`))
-            .append($('<td>').html(`${obj.bonnesLettresJoueur}`))
-            .append($('<td>').html(`${obj.mauvaisesLettresJoueur}`))
-            .append($('<td>').html(`${obj.tempsJoueur}`))
-        )
-    }  
-})
 
 
 function startGame() {

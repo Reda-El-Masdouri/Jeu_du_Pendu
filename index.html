@@ -6,6 +6,13 @@
   <meta name="viewport" content="width=device-width">
   <title>Jeu du Pendu</title>
   <link href="style.css" rel="stylesheet" type="text/css" />
+  <!-- font-family-->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Caveat&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
+  <!--script-->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script src="themes.js"></script>
 </head>
@@ -13,7 +20,7 @@
 <body>
   <div class="container">
     <h1>Jeu du Pendu</h1>
-    <p>Description du Jeu</p>
+    <p align="center" id="description-jeu">Sauver le bonhomme pendu. Pour commencer le jeu veuillez choisir un thème puis devinez le mot caché. Vos bonnes et mauvaises lettres (non accentuées) sont comptabilisées ainsi que la durée de la partie. Vous perdez la partie si le bonhomme apparrait en entier. Si vos résultats sont remarquables on demande vous enregistrer avec les top dix. Une autre partie est automatiquement lancée avec un mot aléatoirement choisi du dernier thème. À chaque moment vous pouvez voir la liste des top dix en cliquant sur le bouton "Aficher meilleurs joueurs".</p>
     <div class="jeu-container">
       <!-- Themes -->
       <div class="themes" id="themes">
@@ -63,11 +70,14 @@
     <!-- table des top dix -->
     <div class="table-topdix-container" id="table-topdix-container">
       <table class="table-topdix" border="1">
-        <tr>
-          <thead>
+        <thead>
+          <tr>
             <td>Rangs</td><td>Noms</td><td>Bonnes lettres</td><td>Mauvaises lettres</td><td>Temps</td>
-          </thead>
-        </tr>
+          </tr>
+        </thead>
+        <tbody>
+
+        </tbody>
       </table>
       <button id="OK-btn">OK</button>
     </div>
