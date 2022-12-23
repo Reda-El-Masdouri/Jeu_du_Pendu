@@ -272,7 +272,7 @@ function remplirTableTopDix() {
                     .append($('<td>').html(`${obj.pseudoName}`))
                     .append($('<td>').html(`${obj.bonnesLettresJoueur}`))
                     .append($('<td>').html(`${obj.mauvaisesLettresJoueur}`))
-                    .append($('<td>').html(`${obj.tempsJoueur}`))
+                    .append($('<td>').html(`${millisToMinutesAndSeconds(obj.tempsJoueur)}`))
                 )
             }  
         })
@@ -280,7 +280,11 @@ function remplirTableTopDix() {
     
 }
 
-
+function millisToMinutesAndSeconds(millis) {
+    var minutes = Math.floor(millis / 60000);
+    var seconds = ((millis % 60000) / 1000).toFixed(0);
+    return minutes + ":" + (seconds < 10 ? '0' : '') + seconds;
+  }
 
 function startGame() {
     initiate();
