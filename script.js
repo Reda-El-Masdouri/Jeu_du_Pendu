@@ -139,8 +139,9 @@ function afficherNotification() {
 function activateKeys() {
     $(window).keydown(e => {
         if(typeof motSelectionne !== "undefined"){
+            
             // les keyCode des lettres varient entre 65=>a et 90=>z. keyCod = 65 et key = a.
-            if(e.keyCode >= 65 && e.keyCode <= 90){
+            if((e.keyCode >= 65 && e.keyCode <= 90) || e.keyCode == 55 || e.keyCode == 50 || e.keyCode == 48 || e.keyCode ==57){
                 const lettre = e.key;
                 if(motSelectionne.includes(lettre)){
                     if(!tabBonneLettres.includes(lettre)){
