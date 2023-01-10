@@ -19,7 +19,8 @@ body{
   stroke-width: 4px;
   stroke-linecap: round;
   fill: transparent;
-  margin-left: 20px;
+  margin-left: 0px;
+  margin-bottom: 30px;
 }
 
 #description-jeu {
@@ -82,7 +83,7 @@ body{
   bottom: 10px;
   left: 50%;
   transform: translateX(-50%);
-  padding-bottom: 20px;
+  padding-bottom: 30px;
   
 }
 
@@ -151,9 +152,10 @@ body{
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
-  padding-top: 20px;
-  margin-top: 20px;
-  bottom: -35px;
+  padding-top: 0px;
+  margin-top: 0px;
+  bottom: -15px;
+  width: 300px;
 }
 
 .themes {
@@ -242,4 +244,9 @@ body{
 }
 #OK-btn {
   margin-left: 10px;
+}
+
+img {
+  width: 20px;
+  height: 20px;
 }
