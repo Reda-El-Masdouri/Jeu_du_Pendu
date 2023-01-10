@@ -183,6 +183,7 @@ btnRejouer.click(e => {
         updateMauvaisesLettres();
         afficherMot();
         messageFinal.css({"display":"none"});
+        afficherLife();
     }
     if(btnRejouer.text()==="Rejouer"){
         tabBonneLettres.splice(0);
