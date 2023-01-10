@@ -35,7 +35,7 @@ const message = $('#message');
 const themesTable = $('.all-themes');
 const bonhommeParts = $('.bonhomme-part');
 const btnTopDix = $('.btn-meilleurs-joueurs-container button');
-
+const lifeSpan = $('.life');
 const themesJSON = [ecoleJSON, paysagesClimatJSON, calculMesuresJSON, alimentsJSON, gestesMouvementsJSON];
 const themes = themesJSON.map(JSON.parse);
 
@@ -109,8 +109,15 @@ function updateMauvaisesLettres() {
         const nbrErrors = tabMauvaisesLettres.length;
         if(index < nbrErrors){
             part.style.display = 'block';
+
         } else {
             part.style.display= 'none';
+        }
+    })
+    jQuery.each(lifeSpan, (index, life) => {
+        const nbrErrors = tabMauvaisesLettres.length;
+        if(index < nbrErrors){
+            life.style.display = 'none';
         }
     })
     // tester game over
@@ -141,7 +148,7 @@ function activateKeys() {
         if(typeof motSelectionne !== "undefined"){
             
             // les keyCode des lettres varient entre 65=>a et 90=>z. keyCod = 65 et key = a.
-            if((e.keyCode >= 65 && e.keyCode <= 90) || e.keyCode == 55 || e.keyCode == 50 || e.keyCode == 48 || e.keyCode ==57){
+            if((e.keyCode >= 65 && e.keyCode <= 90) || e.keyCode == 55 || e.keyCode == 50 || e.keyCode == 48 || e.keyCode == 57){
                 const lettre = e.key;
                 if(motSelectionne.includes(lettre)){
                     if(!tabBonneLettres.includes(lettre)){
@@ -181,12 +188,13 @@ btnRejouer.click(e => {
         tabBonneLettres.splice(0);
         tabMauvaisesLettres.splice(0);
         initiate();
-        maSelection()
+        maSelection();
 
         $(window).on('keydown', activateKeys());
         updateMauvaisesLettres();
         afficherMot();
         messageFinal.css({"display":"none"});
+        afficherLife();
     }
     if(btnRejouer.text() === "Comparer mes résultats"){
         if(isTopDix()){
@@ -219,6 +227,7 @@ btnRejouer.click(e => {
         updateMauvaisesLettres();
         afficherMot();
         messageFinal.css({"display":"none"});
+        afficherLife();
     }
 })
 
@@ -281,6 +290,11 @@ function remplirTableTopDix() {
     
 }
 
+function afficherLife(){
+    jQuery.each(lifeSpan, (index, life) => {
+            life.style.display = 'inline';
+    })
+}
 function millisToMinutesAndSeconds(millis) {
     var minutes = Math.floor(millis / 60000);
     var seconds = ((millis % 60000) / 1000).toFixed(0);
